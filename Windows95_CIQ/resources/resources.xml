@@ -1,0 +1,10 @@
+<resources>
+    <string id="AppName">Windows95_CIQ</string>
+
+    <bitmap id="LauncherIcon" filename="images/launcher_icon.png" />
+    <bitmap id="MyComputer_text" filename="images/windows_95_computer_text.png" />
+    <bitmap id="MyComputer_icon" filename="images/windows_95_computer_icon.png" />
+    <bitmap id="Start_button" filename="images/windows_95_start.png" />
+    
+    <font id="Windows95_font" filename="fonts/windows_95_fnt.fnt"/>
+</resources>
