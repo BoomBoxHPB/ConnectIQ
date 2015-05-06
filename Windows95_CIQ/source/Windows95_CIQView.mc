@@ -17,8 +17,15 @@ class Windows95_CIQView extends Ui.WatchFace {
     //! Update the view
     function onUpdate(dc) {
         // Get and show the current time
+		var hour;
+		var min;
+		var tag;
+		
         var clockTime = Sys.getClockTime();
         var timeString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%.2d")]);
+        
+        var settings = Sys.getDeviceSettings();
+        
         //var view = View.findDrawableById("TimeLabel");
         //view.setText(timeString);
 
@@ -47,8 +54,32 @@ class Windows95_CIQView extends Ui.WatchFace {
 		dc.drawBitmap(7, 40, Ui.loadResource( Rez.Drawables.MyComputer_text ) );
 		dc.drawBitmap(6, 128, Ui.loadResource( Rez.Drawables.Start_button ) );
 		
+		hour = clockTime.hour;
+		min = clockTime.min;
+
+		if( !settings.is24Hour )
+			{
+			if( hour >= 12 )
+				{
+				tag = "PM";
+				}
+			else
+				{
+				tag = "AM";
+				}
+			hour = hour % 12;
+			hour = ( hour == 0 ) ? 12 : hour;
+			}
+		else
+			{
+			tag = "";
+			}
+
+		hour = hour.toString();
+		min = clockTime.min.format("%02d");
+		
 		dc.setColor( 0x000000, 0xAAAAAA, 0x000000 );
-		dc.drawText( 197, 124, Ui.loadResource( Rez.Fonts.Windows95_font ), "22:11pPM", Graphics.TEXT_JUSTIFY_RIGHT );
+		dc.drawText( 150, 125, Ui.loadResource( Rez.Fonts.Windows95_font ), hour+":"+min+tag, Graphics.TEXT_JUSTIFY_LEFT );
 		
         // Call the parent onUpdate function to redraw the layout
         //View.onUpdate(dc);
