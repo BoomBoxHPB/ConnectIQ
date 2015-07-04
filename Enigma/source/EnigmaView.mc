@@ -66,12 +66,14 @@ class EnigmaView extends Ui.WatchFace {
                              [ 0, 0, 1 ],
                              [ 1, 1, 1 ] ] ];
        
-    var size;      
-                             
+    var size = 6;      
+    var randomNumber = new [18];
 
     //! Load your resources here
     function onLayout(dc) {
-        size = 7;
+        for( var i = 0; i < 18; i++ ) {
+            randomNumber[i] = Math.rand() % 10;
+        }
     }
 
     //! Restore the state of the app and prepare the view to be shown
@@ -108,7 +110,7 @@ class EnigmaView extends Ui.WatchFace {
     function onUpdate(dc) {
         // Get and show the current time
         var clockTime = Sys.getClockTime();
-        var date = Time.Gregorian.info(Time.now(),0);
+        var day= Time.Gregorian.info(Time.now(),0);
         
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
         dc.clear();
@@ -137,19 +139,17 @@ class EnigmaView extends Ui.WatchFace {
         var screen_width  = dc.getWidth();
         
         dc.setColor(Gfx.COLOR_DK_RED,Gfx.COLOR_DK_RED);
-                
+
         var numberH = ( screen_height / 2 ) - ( 2.5 * size );
         var numberW = ( screen_width / 2 ) - ( 10.5 * size );
         var runningH = numberH;
         var runningW = numberW;
-        var randomNumber;
         
         dc.fillRectangle(0, numberH - (1.5 * size), screen_width, (8 * size));
         
         // TIME!
         runningW -= 6 * size;
-        randomNumber = Math.rand() % 10;
-        drawNumber( runningW, runningH, randomNumber, Gfx.COLOR_WHITE, dc );
+        drawNumber( runningW, runningH, randomNumber[0], Gfx.COLOR_DK_GRAY, dc );
         runningW += 6 * size;
         drawNumber( runningW, runningH, hour / 10, Gfx.COLOR_WHITE, dc );
         runningW += 6 * size;
@@ -159,14 +159,12 @@ class EnigmaView extends Ui.WatchFace {
         runningW += 6 * size;
         drawNumber( runningW, runningH, minute % 10, Gfx.COLOR_WHITE, dc );
         runningW += 6 * size;
-        randomNumber = Math.rand() % 10;
-        drawNumber( runningW, runningH, randomNumber, Gfx.COLOR_WHITE, dc );
+        drawNumber( runningW, runningH, randomNumber[1], Gfx.COLOR_DK_GRAY, dc );
 
         // DATE!
         runningW = numberW - 6 * size;
         runningH = numberH - 8 * size;
-        randomNumber = Math.rand() % 10;
-        drawNumber( runningW, runningH, randomNumber, Gfx.COLOR_WHITE, dc );
+        drawNumber( runningW, runningH, randomNumber[2], Gfx.COLOR_DK_GRAY, dc );
         runningW += 6 * size;
         drawNumber( runningW, runningH, date.month / 10, Gfx.COLOR_WHITE, dc );
         runningW += 6 * size;
@@ -176,13 +174,11 @@ class EnigmaView extends Ui.WatchFace {
         runningW += 6 * size;
         drawNumber( runningW, runningH, date.day % 10, Gfx.COLOR_WHITE, dc );
         runningW += 6 * size;
-        randomNumber = Math.rand() % 10;
-        drawNumber( runningW, runningH, randomNumber, Gfx.COLOR_WHITE, dc );
+        drawNumber( runningW, runningH, randomNumber[3], Gfx.COLOR_DK_GRAY, dc );
 
         runningW = numberW - 6 * size;
         runningH = numberH + 8 * size;
-        randomNumber = Math.rand() % 10;
-        drawNumber( runningW, runningH, randomNumber, Gfx.COLOR_WHITE, dc );
+        drawNumber( runningW, runningH, randomNumber[4], Gfx.COLOR_DK_GRAY, dc );
         runningW += 6 * size;
         drawNumber( runningW, runningH, date.year / 1000, Gfx.COLOR_WHITE, dc );
         runningW += 6 * size;
@@ -192,20 +188,17 @@ class EnigmaView extends Ui.WatchFace {
         runningW += 6 * size;
         drawNumber( runningW, runningH, date.year % 10, Gfx.COLOR_WHITE, dc );
         runningW += 6 * size;
-        randomNumber = Math.rand() % 10;
-        drawNumber( runningW, runningH, randomNumber, Gfx.COLOR_WHITE, dc );
+        drawNumber( runningW, runningH, randomNumber[5], Gfx.COLOR_DK_GRAY, dc );
 
         // UPPER RANDOM NUMBERS!
         runningW = numberW - 6 * size;
         runningH = numberH - 16 * size;
         if( ( runningH + 35 ) >= 0 ){
-	        randomNumber = Math.rand() % 10;
-	        drawNumber( runningW, runningH, randomNumber, Gfx.COLOR_DK_GRAY, dc );
+	        drawNumber( runningW, runningH, randomNumber[6], Gfx.COLOR_DK_GRAY, dc );
 	        
 	        for( var i=0; i<5; i++ ){
 	            runningW += 6 * size;
-	            randomNumber = Math.rand() % 10;
-	            drawNumber( runningW, runningH, randomNumber, Gfx.COLOR_DK_GRAY, dc );
+	            drawNumber( runningW, runningH, randomNumber[7+i], Gfx.COLOR_DK_GRAY, dc );
 	        }
         }
         
@@ -213,13 +206,11 @@ class EnigmaView extends Ui.WatchFace {
         runningW = numberW - 6 * size;
         runningH = numberH + 16 * size;
         if( runningH <= screen_height ){
-	        randomNumber = Math.rand() % 10;
-	        drawNumber( runningW, runningH, randomNumber, Gfx.COLOR_DK_GRAY, dc );
+	        drawNumber( runningW, runningH, randomNumber[12], Gfx.COLOR_DK_GRAY, dc );
 	        
 	        for( var i=0; i<5; i++ ){
 	            runningW += 6 * size;
-	            randomNumber = Math.rand() % 10;
-	            drawNumber( runningW, runningH, randomNumber, Gfx.COLOR_DK_GRAY, dc );
+	            drawNumber( runningW, runningH, randomNumber[13+i], Gfx.COLOR_DK_GRAY, dc );
 	        }
         }
     }

@@ -7,13 +7,16 @@
             <iq:product id="vivoactive"/>
             <iq:product id="fenix3"/>
             <iq:product id="fr920xt"/>
+            <iq:product id="d2bravo"/>
             <iq:product id="epix"/>
         </iq:products>
 
         <iq:permissions>
         </iq:permissions>
 
-        <iq:languages/>
+        <iq:languages>
+            <iq:language>eng</iq:language>
+        </iq:languages>
 
     </iq:application>
 </iq:manifest>
