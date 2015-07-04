@@ -1,8 +1,10 @@
 <resources>
     <string id="AppName">Pride</string>
+    <string id="device">vivoactive</string>
 
     <bitmap id="LauncherIcon" filename="images/launcher_icon.png" />
-    <bitmap id="FlagSegment" filename="images/flag_segment.png" dithering="none"/>
+    <bitmap id="FlagSegment64" filename="images/flag_segment_64.png" dithering="none"/>
+    <bitmap id="FlagSegment16" filename="images/flag_segment_16.png" dithering="none"/>
     <bitmap id="StarSegmentOne" filename="images/star_one.png" dithering="none"/>
     <bitmap id="StarSegmentTwo" filename="images/star_Two.png" dithering="none"/>
 </resources>
