@@ -1,0 +1,8 @@
+<resources>
+    <string id="AppName">Pride</string>
+
+    <bitmap id="LauncherIcon" filename="images/launcher_icon.png" />
+    <bitmap id="FlagSegment" filename="images/flag_segment.png" dithering="none"/>
+    <bitmap id="StarSegmentOne" filename="images/star_one.png" dithering="none"/>
+    <bitmap id="StarSegmentTwo" filename="images/star_Two.png" dithering="none"/>
+</resources>
