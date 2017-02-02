@@ -110,7 +110,7 @@ class EnigmaView extends Ui.WatchFace {
     function onUpdate(dc) {
         // Get and show the current time
         var clockTime = Sys.getClockTime();
-        var day= Time.Gregorian.info(Time.now(),0);
+        var date = Time.Gregorian.info(Time.now(),0);
         
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
         dc.clear();

@@ -3,16 +3,28 @@
 
         <iq:products>
             <iq:product id="square_watch"/>
+            <iq:product id="tall_watch"/>
             <iq:product id="round_watch"/>
+            <iq:product id="fenix5"/>
+            <iq:product id="fenix5x"/>
+            <iq:product id="fenix5s"/>
+            <iq:product id="semi_round_watch"/>
+            <iq:product id="fr630"/>
+            <iq:product id="fr235"/>
+            <iq:product id="fr735xt"/>
+            <iq:product id="fr230"/>
             <iq:product id="vivoactive"/>
             <iq:product id="fenix3"/>
-            <iq:product id="fr920xt"/>
+            <iq:product id="fenix3_hr"/>
+            <iq:product id="fenixchronos"/>
             <iq:product id="d2bravo"/>
+            <iq:product id="d2bravo_titanium"/>
+            <iq:product id="fr920xt"/>
             <iq:product id="epix"/>
+            <iq:product id="vivoactive_hr"/>
         </iq:products>
 
-        <iq:permissions>
-        </iq:permissions>
+        <iq:permissions/>
 
         <iq:languages>
             <iq:language>eng</iq:language>
