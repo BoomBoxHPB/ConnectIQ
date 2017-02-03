@@ -6,104 +6,44 @@ using Toybox.Time as Time;
 using Toybox.Math as Math;
 
 class EnigmaView extends Ui.WatchFace {
-    var numberSegments = [ [ [ 1, 1, 1 ],
-                             [ 1, 0, 1 ],
-                             [ 1, 0, 1 ],
-                             [ 1, 0, 1 ],
-                             [ 1, 1, 1 ] ],
-                             
-                           [ [ 1, 1, 0 ],
-                             [ 0, 1, 0 ],
-                             [ 0, 1, 0 ],
-                             [ 0, 1, 0 ],
-                             [ 1, 1, 1 ] ],
-                             
-                           [ [ 1, 1, 1 ],
-                             [ 0, 0, 1 ],
-                             [ 1, 1, 1 ],
-                             [ 1, 0, 0 ],
-                             [ 1, 1, 1 ] ],
-                             
-                           [ [ 1, 1, 1 ],
-                             [ 0, 0, 1 ],
-                             [ 0, 1, 1 ],
-                             [ 0, 0, 1 ],
-                             [ 1, 1, 1 ] ],
-                             
-                           [ [ 1, 0, 1 ],
-                             [ 1, 0, 1 ],
-                             [ 1, 1, 1 ],
-                             [ 0, 0, 1 ],
-                             [ 0, 0, 1 ] ],
-                             
-                           [ [ 1, 1, 1 ],
-                             [ 1, 0, 0 ],
-                             [ 1, 1, 1 ],
-                             [ 0, 0, 1 ],
-                             [ 1, 1, 1 ] ],
-                             
-                           [ [ 1, 1, 1 ],
-                             [ 1, 0, 0 ],
-                             [ 1, 1, 1 ],
-                             [ 1, 0, 1 ],
-                             [ 1, 1, 1 ] ],
-                             
-                           [ [ 1, 1, 1 ],
-                             [ 1, 0, 1 ],
-                             [ 0, 0, 1 ],
-                             [ 0, 0, 1 ],
-                             [ 0, 0, 1 ] ],
-                             
-                           [ [ 1, 1, 1 ],
-                             [ 1, 0, 1 ],
-                             [ 1, 1, 1 ],
-                             [ 1, 0, 1 ],
-                             [ 1, 1, 1 ] ],
-                             
-                           [ [ 1, 1, 1 ],
-                             [ 1, 0, 1 ],
-                             [ 1, 1, 1 ],
-                             [ 0, 0, 1 ],
-                             [ 1, 1, 1 ] ] ];
-       
-    var size = 6;      
+	var numbersWhite = new [10];
+	var numbersGray = new [10];
     var randomNumber = new [18];
+
+    function initialize() {
+        WatchFace.initialize();
+    }
 
     //! Load your resources here
     function onLayout(dc) {
         for( var i = 0; i < 18; i++ ) {
             randomNumber[i] = Math.rand() % 10;
         }
+    	numbersWhite[0] = Ui.loadResource(Rez.Drawables.ZeroWhite);
+    	numbersWhite[1] = Ui.loadResource(Rez.Drawables.OneWhite);
+    	numbersWhite[2] = Ui.loadResource(Rez.Drawables.TwoWhite);
+    	numbersWhite[3] = Ui.loadResource(Rez.Drawables.ThreeWhite);
+    	numbersWhite[4] = Ui.loadResource(Rez.Drawables.FourWhite);
+    	numbersWhite[5] = Ui.loadResource(Rez.Drawables.FiveWhite);
+    	numbersWhite[6] = Ui.loadResource(Rez.Drawables.SixWhite);
+    	numbersWhite[7] = Ui.loadResource(Rez.Drawables.SevenWhite);
+    	numbersWhite[8] = Ui.loadResource(Rez.Drawables.EightWhite);
+    	numbersWhite[9] = Ui.loadResource(Rez.Drawables.NineWhite);
+
+    	numbersGray[0] = Ui.loadResource(Rez.Drawables.ZeroGray);
+    	numbersGray[1] = Ui.loadResource(Rez.Drawables.OneGray);
+    	numbersGray[2] = Ui.loadResource(Rez.Drawables.TwoGray);
+    	numbersGray[3] = Ui.loadResource(Rez.Drawables.ThreeGray);
+    	numbersGray[4] = Ui.loadResource(Rez.Drawables.FourGray);
+    	numbersGray[5] = Ui.loadResource(Rez.Drawables.FiveGray);
+    	numbersGray[6] = Ui.loadResource(Rez.Drawables.SixGray);
+    	numbersGray[7] = Ui.loadResource(Rez.Drawables.SevenGray);
+    	numbersGray[8] = Ui.loadResource(Rez.Drawables.EightGray);
+    	numbersGray[9] = Ui.loadResource(Rez.Drawables.NineGray);
     }
 
     //! Restore the state of the app and prepare the view to be shown
     function onShow() {
-    }
-
-    function drawNumber( x, y, number, color, dc ) {
-        var old_x = x;
-        var segments;
-        dc.setColor( color, color );
-        
-        if( number < 0 || number > 9 ) {
-            return;
-        }
-        
-        segments = numberSegments[number];
-        
-        for( var i = 0; i < 5; i++ ){
-            for( var j = 0; j < 3; j++ ){
-                if( segments[i][j] == 1 ) {
-                    dc.fillRectangle(x, y, size, size);
-                }
-                
-                x = x + size;
-            }
-        
-            y = y + size;
-            x = old_x;
-        }
-        
     }
 
     //! Update the view
@@ -140,77 +80,77 @@ class EnigmaView extends Ui.WatchFace {
         
         dc.setColor(Gfx.COLOR_DK_RED,Gfx.COLOR_DK_RED);
 
-        var numberH = ( screen_height / 2 ) - ( 2.5 * size );
-        var numberW = ( screen_width / 2 ) - ( 10.5 * size );
+        var numberH = ( screen_height / 2 ) - ( 2.5 * 6 );
+        var numberW = ( screen_width / 2 ) - ( 10.5 * 6 );
         var runningH = numberH;
         var runningW = numberW;
         
-        dc.fillRectangle(0, numberH - (1.5 * size), screen_width, (8 * size));
+        dc.fillRectangle(0, numberH - (1.5 * 6), screen_width, (8 * 6));
         
         // TIME!
-        runningW -= 6 * size;
-        drawNumber( runningW, runningH, randomNumber[0], Gfx.COLOR_DK_GRAY, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, hour / 10, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, hour % 10, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, minute / 10, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, minute % 10, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, randomNumber[1], Gfx.COLOR_DK_GRAY, dc );
+        runningW -= 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[0]] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[hour / 10] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[hour % 10] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[minute / 10] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[minute % 10] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[1]] );
 
         // DATE!
-        runningW = numberW - 6 * size;
-        runningH = numberH - 8 * size;
-        drawNumber( runningW, runningH, randomNumber[2], Gfx.COLOR_DK_GRAY, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, date.month / 10, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, date.month % 10, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, date.day / 10, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, date.day % 10, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, randomNumber[3], Gfx.COLOR_DK_GRAY, dc );
+        runningW = numberW - 6 * 6;
+        runningH = numberH - 8 * 6;
+        dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[2]] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[date.month / 10] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[date.month % 10] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[date.day / 10] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[date.day % 10] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[3]] );
 
-        runningW = numberW - 6 * size;
-        runningH = numberH + 8 * size;
-        drawNumber( runningW, runningH, randomNumber[4], Gfx.COLOR_DK_GRAY, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, date.year / 1000, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, ( date.year % 1000 ) / 100, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, ( date.year % 100 ) / 10, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, date.year % 10, Gfx.COLOR_WHITE, dc );
-        runningW += 6 * size;
-        drawNumber( runningW, runningH, randomNumber[5], Gfx.COLOR_DK_GRAY, dc );
+        runningW = numberW - 6 * 6;
+        runningH = numberH + 8 * 6;
+        dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[4]] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[date.year / 1000] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[( date.year % 1000 ) / 100] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[( date.year % 100 ) / 10] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[date.year % 10] );
+        runningW += 6 * 6;
+        dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[5]] );
 
         // UPPER RANDOM NUMBERS!
-        runningW = numberW - 6 * size;
-        runningH = numberH - 16 * size;
+        runningW = numberW - 6 * 6;
+        runningH = numberH - 16 * 6;
         if( ( runningH + 35 ) >= 0 ){
-	        drawNumber( runningW, runningH, randomNumber[6], Gfx.COLOR_DK_GRAY, dc );
+	        dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[6]] );
 	        
 	        for( var i=0; i<5; i++ ){
-	            runningW += 6 * size;
-	            drawNumber( runningW, runningH, randomNumber[7+i], Gfx.COLOR_DK_GRAY, dc );
+	            runningW += 6 * 6;
+	            dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[7+i]] );
 	        }
         }
         
         // LOWER RANDOM NUMBERS!
-        runningW = numberW - 6 * size;
-        runningH = numberH + 16 * size;
+        runningW = numberW - 6 * 6;
+        runningH = numberH + 16 * 6;
         if( runningH <= screen_height ){
-	        drawNumber( runningW, runningH, randomNumber[12], Gfx.COLOR_DK_GRAY, dc );
+	        dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[12]] );
 	        
 	        for( var i=0; i<5; i++ ){
-	            runningW += 6 * size;
-	            drawNumber( runningW, runningH, randomNumber[13+i], Gfx.COLOR_DK_GRAY, dc );
+	            runningW += 6 * 6;
+	            dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[13+i]] );
 	        }
         }
     }
