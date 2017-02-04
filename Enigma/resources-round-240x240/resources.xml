@@ -1,0 +1,109 @@
+<resources>
+    <string id="AppName">Enigma</string>
+
+    <bitmap id="LauncherIcon" filename="images/launcher_icon.png" />
+    
+    
+    <bitmap id="ZeroWhite" filename="images/zero.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="OneWhite" filename="images/zero.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="TwoWhite" filename="images/two.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="ThreeWhite" filename="images/three.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="FourWhite" filename="images/four.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="FiveWhite" filename="images/five.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="SixWhite" filename="images/six.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="SevenWhite" filename="images/seven.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="EightWhite" filename="images/eight.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+    <bitmap id="NineWhite" filename="images/nine.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
+
+
+    <bitmap id="ZeroGray" filename="images/zero.png" >
+        <palette disableTransparency="false">
+            <color>555555</color>
+        </palette>
+    </bitmap>
+    <bitmap id="OneGray" filename="images/zero.png" >
+        <palette disableTransparency="false">
+            <color>555555</color>
+        </palette>
+    </bitmap>
+    <bitmap id="TwoGray" filename="images/two.png" >
+        <palette disableTransparency="false">
+            <color>555555</color>
+        </palette>
+    </bitmap>
+    <bitmap id="ThreeGray" filename="images/three.png" >
+        <palette disableTransparency="false">
+            <color>555555</color>
+        </palette>
+    </bitmap>
+    <bitmap id="FourGray" filename="images/four.png" >
+        <palette disableTransparency="false">
+            <color>555555</color>
+        </palette>
+    </bitmap>
+    <bitmap id="FiveGray" filename="images/five.png" >
+        <palette disableTransparency="false">
+            <color>555555</color>
+        </palette>
+    </bitmap>
+    <bitmap id="SixGray" filename="images/six.png" >
+        <palette disableTransparency="false">
+            <color>555555</color>
+        </palette>
+    </bitmap>
+    <bitmap id="SevenGray" filename="images/seven.png" >
+        <palette disableTransparency="false">
+            <color>555555</color>
+        </palette>
+    </bitmap>
+    <bitmap id="EightGray" filename="images/eight.png" >
+        <palette disableTransparency="false">
+            <color>555555</color>
+        </palette>
+    </bitmap>
+    <bitmap id="NineGray" filename="images/nine.png" >
+        <palette disableTransparency="false">
+            <color>555555</color>
+        </palette>
+    </bitmap>
+</resources>

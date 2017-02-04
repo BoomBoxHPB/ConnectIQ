@@ -9,7 +9,8 @@ class EnigmaView extends Ui.WatchFace {
 	var numbersWhite = new [10];
 	var numbersGray = new [10];
     var randomNumber = new [18];
-
+    var size;
+	
     function initialize() {
         WatchFace.initialize();
     }
@@ -40,6 +41,8 @@ class EnigmaView extends Ui.WatchFace {
     	numbersGray[7] = Ui.loadResource(Rez.Drawables.SevenGray);
     	numbersGray[8] = Ui.loadResource(Rez.Drawables.EightGray);
     	numbersGray[9] = Ui.loadResource(Rez.Drawables.NineGray);
+    	
+    	size = numbersWhite[0].getHeight()  / 5;
     }
 
     //! Restore the state of the app and prepare the view to be shown
@@ -80,76 +83,76 @@ class EnigmaView extends Ui.WatchFace {
         
         dc.setColor(Gfx.COLOR_DK_RED,Gfx.COLOR_DK_RED);
 
-        var numberH = ( screen_height / 2 ) - ( 2.5 * 6 );
-        var numberW = ( screen_width / 2 ) - ( 10.5 * 6 );
+        var numberH = ( screen_height / 2 ) - ( 2.5 * size );
+        var numberW = ( screen_width / 2 ) - ( 10.5 * size );
         var runningH = numberH;
         var runningW = numberW;
         
-        dc.fillRectangle(0, numberH - (1.5 * 6), screen_width, (8 * 6));
+        dc.fillRectangle(0, numberH - (1.5 * size), screen_width, (8 * size));
         
         // TIME!
-        runningW -= 6 * 6;
+        runningW -= 6 * size;
         dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[0]] );
-        runningW += 6 * 6;
+        runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersWhite[hour / 10] );
-        runningW += 6 * 6;
+        runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersWhite[hour % 10] );
-        runningW += 6 * 6;
+        runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersWhite[minute / 10] );
-        runningW += 6 * 6;
+        runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersWhite[minute % 10] );
-        runningW += 6 * 6;
+        runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[1]] );
 
         // DATE!
-        runningW = numberW - 6 * 6;
-        runningH = numberH - 8 * 6;
+        runningW = numberW - 6 * size;
+        runningH = numberH - 8 * size;
         dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[2]] );
-        runningW += 6 * 6;
+        runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersWhite[date.month / 10] );
-        runningW += 6 * 6;
+        runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersWhite[date.month % 10] );
-        runningW += 6 * 6;
+        runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersWhite[date.day / 10] );
-        runningW += 6 * 6;
+        runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersWhite[date.day % 10] );
-        runningW += 6 * 6;
+        runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[3]] );
 
-        runningW = numberW - 6 * 6;
-        runningH = numberH + 8 * 6;
+        runningW = numberW - 6 * size;
+        runningH = numberH + 8 * size;
         dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[4]] );
-        runningW += 6 * 6;
+        runningW += size * 6;
         dc.drawBitmap( runningW, runningH, numbersWhite[date.year / 1000] );
-        runningW += 6 * 6;
+        runningW += size * 6;
         dc.drawBitmap( runningW, runningH, numbersWhite[( date.year % 1000 ) / 100] );
-        runningW += 6 * 6;
+        runningW += size * 6;
         dc.drawBitmap( runningW, runningH, numbersWhite[( date.year % 100 ) / 10] );
-        runningW += 6 * 6;
+        runningW += size * 6;
         dc.drawBitmap( runningW, runningH, numbersWhite[date.year % 10] );
-        runningW += 6 * 6;
+        runningW += size * 6;
         dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[5]] );
 
         // UPPER RANDOM NUMBERS!
-        runningW = numberW - 6 * 6;
-        runningH = numberH - 16 * 6;
+        runningW = numberW - 6 * size;
+        runningH = numberH - 16 * size;
         if( ( runningH + 35 ) >= 0 ){
 	        dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[6]] );
 	        
 	        for( var i=0; i<5; i++ ){
-	            runningW += 6 * 6;
+	            runningW += 6 * size;
 	            dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[7+i]] );
 	        }
         }
         
         // LOWER RANDOM NUMBERS!
-        runningW = numberW - 6 * 6;
-        runningH = numberH + 16 * 6;
+        runningW = numberW - 6 * size;
+        runningH = numberH + 16 * size;
         if( runningH <= screen_height ){
 	        dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[12]] );
 	        
 	        for( var i=0; i<5; i++ ){
-	            runningW += 6 * 6;
+	            runningW += 6 * size;
 	            dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[13+i]] );
 	        }
         }
