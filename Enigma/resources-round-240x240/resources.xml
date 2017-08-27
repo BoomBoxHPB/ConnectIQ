@@ -9,7 +9,7 @@
             <color>FFFFFF</color>
         </palette>
     </bitmap>
-    <bitmap id="OneWhite" filename="images/zero.png" >
+    <bitmap id="OneWhite" filename="images/one.png" >
         <palette disableTransparency="false">
             <color>FFFFFF</color>
         </palette>
@@ -61,7 +61,7 @@
             <color>555555</color>
         </palette>
     </bitmap>
-    <bitmap id="OneGray" filename="images/zero.png" >
+    <bitmap id="OneGray" filename="images/one.png" >
         <palette disableTransparency="false">
             <color>555555</color>
         </palette>
