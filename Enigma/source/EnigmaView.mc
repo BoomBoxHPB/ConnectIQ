@@ -4,15 +4,12 @@ using Toybox.System as Sys;
 using Toybox.Lang as Lang;
 using Toybox.Time as Time;
 using Toybox.Math as Math;
-using Toybox.Timer as Timer;
 
 class EnigmaView extends Ui.WatchFace {
     var numbersWhite = new [10];
     var numbersGray = new [10];
     var randomNumber = new [18];
     var size;
-    var offset_array = [0.0, 0.5, 0.15, 0.25, 0.35, 0.50, 0.65, 0.75, 0.85, 0.95];
-    var offset_idx = 0;
     var half_height;
 
     // timers - time between frames (approx 12fps @ 80ms)
@@ -52,7 +49,6 @@ class EnigmaView extends Ui.WatchFace {
 
         size = numbersWhite[0].getHeight()  / 5;
         half_height = numbersWhite[0].getHeight()  / 2;
-        offset_idx = 0;
     }
 
     //! Restore the state of the app and prepare the view to be shown
@@ -97,8 +93,8 @@ class EnigmaView extends Ui.WatchFace {
 
         dc.fillRectangle(0, numberH - (4 * size), screen_width, (8 * size));
 
-        numberH += ( ( screen_height * offset_array[offset_idx] ) - half_height );
-        numberH = numberH.toLong() % screen_height;
+        numberH = numberH - half_height;
+
         var numberW = ( screen_width / 2 ) - ( 10.5 * size );
         var runningH = numberH;
         var runningW = numberW;
@@ -172,40 +168,12 @@ class EnigmaView extends Ui.WatchFace {
         }
     }
 
-    function callback_animate() {
-        // redraw the screen
-        Ui.requestUpdate();
-
-        offset_idx++;
-        offset_idx = offset_idx % 10;
-
-        // timer not greater than 500ms? then let's start the timer again
-        //if( timer_timeout < 500 ) {
-            timer = new Timer.Timer();
-            timer.start(method(:callback_animate), timer_timeout, false );
-        //} else {
-        //    // timer exists? stop it
-        //    if( timer ) {
-        //        timer.stop();
-        //    }
-        //}
-    }
-
     //! The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() {
-        // let's start our animation loop
-        timer = new Timer.Timer();
-        timer.start(method(:callback_animate), timer_timeout, false );
     }
 
     //! Terminate any active timers and prepare for slow updates.
     function onEnterSleep() {
-        if( timer ) {
-            timer.stop();
-        }
-
-        timer_timeout = 50;
-        offset_idx = 0;
     }
 
 }
