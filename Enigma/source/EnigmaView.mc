@@ -12,9 +12,10 @@ class EnigmaView extends Ui.WatchFace {
     var dashWhite;
     var size;
     var half_height;
-    var lowPower = true;
+    var lowPower = false;
     var screen_height;
     var screen_width;
+    var do1hz;
 
     // timers - time between frames (approx 12fps @ 80ms)
     var timer_timeout = 50;
@@ -58,6 +59,8 @@ class EnigmaView extends Ui.WatchFace {
 
         size = numbersWhite[0].getHeight()  / 5;
         half_height = numbersWhite[0].getHeight()  / 2;
+
+        do1hz = ( Toybox.WatchUi.WatchFace has :onPartialUpdate );
     }
 
     //! Restore the state of the app and prepare the view to be shown
@@ -154,7 +157,7 @@ class EnigmaView extends Ui.WatchFace {
         runningW += size * 6;
 
         // Seconds
-        if( !lowPower ){
+        if( !lowPower || do1hz ){
             dc.drawBitmap( runningW, runningH, numbersWhite[seconds / 10] );
             runningW += size * 6;
             dc.drawBitmap( runningW, runningH, numbersWhite[seconds % 10] );
@@ -201,19 +204,19 @@ class EnigmaView extends Ui.WatchFace {
 
 
         var numberH = ( screen_height / 2 );
-
-        dc.fillRectangle(0, numberH - (4 * size), screen_width, (8 * size));
+        var numberW = ( screen_width / 2 ) - ( 10.5 * size );
 
         numberH = numberH - half_height;
-        var runningH = numberH;
-        runningH = ( numberH - 8 * size ).toLong() % screen_height;
-        runningH = ( numberH - 8 * size ).toLong() % screen_height;
-        var runningW = 128;
+        var runningH = ( numberH + 8 * size ).toLong() % screen_height;
+        var runningW = numberW + 12 * size;
 
-        dc.drawBitmap( runningW, runningH, dashWhite );
+        dc.setClip( runningW, runningH, size * 10,  6 * size );
+        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
+        dc.fillRectangle(runningW, runningH, size * 10,  6 * size );
+
+        dc.drawBitmap( runningW, runningH, numbersWhite[seconds / 10] );
         runningW += size * 6;
-        dc.drawBitmap( runningW, runningH, dashWhite );
-        runningW += size * 6;
+        dc.drawBitmap( runningW, runningH, numbersWhite[seconds % 10] );
 
     }
 
