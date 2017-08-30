@@ -9,8 +9,12 @@ class EnigmaView extends Ui.WatchFace {
     var numbersWhite = new [10];
     var numbersGray = new [10];
     var randomNumber = new [18];
+    var dashWhite;
     var size;
     var half_height;
+    var lowPower = true;
+    var screen_height;
+    var screen_width;
 
     // timers - time between frames (approx 12fps @ 80ms)
     var timer_timeout = 50;
@@ -22,6 +26,9 @@ class EnigmaView extends Ui.WatchFace {
 
     //! Load your resources here
     function onLayout(dc) {
+        screen_height = dc.getHeight();
+        screen_width  = dc.getWidth();
+
         for( var i = 0; i < 18; i++ ) {
             randomNumber[i] = Math.rand() % 10;
         }
@@ -47,6 +54,8 @@ class EnigmaView extends Ui.WatchFace {
         numbersGray[8] = Ui.loadResource(Rez.Drawables.EightGray);
         numbersGray[9] = Ui.loadResource(Rez.Drawables.NineGray);
 
+        dashWhite = Ui.loadResource(Rez.Drawables.DashWhite);
+
         size = numbersWhite[0].getHeight()  / 5;
         half_height = numbersWhite[0].getHeight()  / 2;
     }
@@ -60,6 +69,7 @@ class EnigmaView extends Ui.WatchFace {
         // Get and show the current time
         var clockTime = Sys.getClockTime();
         var date = Time.Gregorian.info(Time.now(),0);
+        var stats = Sys.getSystemStats();
 
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
         dc.clear();
@@ -83,9 +93,7 @@ class EnigmaView extends Ui.WatchFace {
             }
 
         var minute = clockTime.min;
-
-        var screen_height = dc.getHeight();
-        var screen_width  = dc.getWidth();
+        var seconds = clockTime.sec;
 
         dc.setColor(Gfx.COLOR_DK_RED,Gfx.COLOR_DK_RED);
 
@@ -129,18 +137,36 @@ class EnigmaView extends Ui.WatchFace {
         runningW += 6 * size;
         dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[3]] );
 
+        // Random number (bottom left)
         runningW = numberW - 6 * size;
         runningH = ( numberH + 8 * size ).toLong() % screen_height;
         dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[4]] );
         runningW += size * 6;
-        dc.drawBitmap( runningW, runningH, numbersWhite[date.year / 1000] );
+
+        // Battery level (cap at 99%)
+        var batt_int = stats.battery.toNumber();
+        if( batt_int > 99 ){
+            batt_int = 99;
+        }
+        dc.drawBitmap( runningW, runningH, numbersWhite[batt_int / 10] );
         runningW += size * 6;
-        dc.drawBitmap( runningW, runningH, numbersWhite[( date.year % 1000 ) / 100] );
+        dc.drawBitmap( runningW, runningH, numbersWhite[batt_int % 10] );
         runningW += size * 6;
-        dc.drawBitmap( runningW, runningH, numbersWhite[( date.year % 100 ) / 10] );
-        runningW += size * 6;
-        dc.drawBitmap( runningW, runningH, numbersWhite[date.year % 10] );
-        runningW += size * 6;
+
+        // Seconds
+        if( !lowPower ){
+            dc.drawBitmap( runningW, runningH, numbersWhite[seconds / 10] );
+            runningW += size * 6;
+            dc.drawBitmap( runningW, runningH, numbersWhite[seconds % 10] );
+            runningW += size * 6;
+        } else{
+            dc.drawBitmap( runningW, runningH, dashWhite );
+            runningW += size * 6;
+            dc.drawBitmap( runningW, runningH, dashWhite );
+            runningW += size * 6;
+        }
+
+        // Random number (bottom right)
         dc.drawBitmap( runningW, runningH, numbersGray[randomNumber[5]] );
 
         // UPPER RANDOM NUMBERS!
@@ -169,11 +195,36 @@ class EnigmaView extends Ui.WatchFace {
     }
 
     //! The user has just looked at their watch. Timers and animations may be started here.
+    function onPartialUpdate(dc) {
+        var clockTime = Sys.getClockTime();
+        var seconds = clockTime.sec;
+
+
+        var numberH = ( screen_height / 2 );
+
+        dc.fillRectangle(0, numberH - (4 * size), screen_width, (8 * size));
+
+        numberH = numberH - half_height;
+        var runningH = numberH;
+        runningH = ( numberH - 8 * size ).toLong() % screen_height;
+        runningH = ( numberH - 8 * size ).toLong() % screen_height;
+        var runningW = 128;
+
+        dc.drawBitmap( runningW, runningH, dashWhite );
+        runningW += size * 6;
+        dc.drawBitmap( runningW, runningH, dashWhite );
+        runningW += size * 6;
+
+    }
+
+    //! The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() {
+        lowPower = false;
     }
 
     //! Terminate any active timers and prepare for slow updates.
     function onEnterSleep() {
+        lowPower = true;
     }
 
 }

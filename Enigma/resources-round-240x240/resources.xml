@@ -54,6 +54,11 @@
             <color>FFFFFF</color>
         </palette>
     </bitmap>
+    <bitmap id="DashWhite" filename="images/dash.png" >
+        <palette disableTransparency="false">
+            <color>FFFFFF</color>
+        </palette>
+    </bitmap>
 
 
     <bitmap id="ZeroGray" filename="images/zero.png" >
