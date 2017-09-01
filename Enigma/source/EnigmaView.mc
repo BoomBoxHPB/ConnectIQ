@@ -79,6 +79,8 @@ class EnigmaView extends Ui.WatchFace {
         var date = Time.Gregorian.info(Time.now(),0);
         var stats = Sys.getSystemStats();
 
+        dc.clearClip();
+
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_BLACK);
         dc.clear();
 
