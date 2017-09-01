@@ -6,13 +6,13 @@ using Toybox.Time as Time;
 using Toybox.Math as Math;
 
 class EnigmaView extends Ui.WatchFace {
-    var numbersWhite = new [10];
-    var numbersGray = new [10];
-    var randomNumber = new [18];
+    var numbersWhite;
+    var numbersGray;
+    var randomNumber;
     var dashWhite;
     var size;
     var half_height;
-    var lowPower = false;
+    var lowPower;
     var screen_height;
     var screen_width;
     var do1hz;
@@ -23,6 +23,11 @@ class EnigmaView extends Ui.WatchFace {
 
     function initialize() {
         WatchFace.initialize();
+
+        numbersWhite = new [10];
+        numbersGray = new [10];
+        randomNumber = new [18];
+        lowPower = false;
     }
 
     //! Load your resources here
@@ -217,7 +222,6 @@ class EnigmaView extends Ui.WatchFace {
         dc.drawBitmap( runningW, runningH, numbersWhite[seconds / 10] );
         runningW += size * 6;
         dc.drawBitmap( runningW, runningH, numbersWhite[seconds % 10] );
-
     }
 
     //! The user has just looked at their watch. Timers and animations may be started here.
